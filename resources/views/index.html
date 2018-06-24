@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>home</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/Lightbox-Gallery.css">
+    <link rel="stylesheet" href="assets/css/Login-Form-Dark.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+
+<body style="margin-left:0px;background-repeat:no-repeat;background-size:cover;width:100%;height:100%;">
+    <nav class="navbar navbar-light navbar-expand-md" style="background-color:#102c41;">
+        <div class="container-fluid"><a class="navbar-brand" href="#" style="color:white;">Brand</a><button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon text-white bg-primary"></span></button>
+            <div
+                class="collapse navbar-collapse" id="navcol-1">
+                <ul class="nav navbar-nav ml-auto">
+                    <li class="nav-item" role="presentation"><a class="nav-link active" href="#" style="color:white;">First Item</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="#" style="color:white;">Second Item</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="#" style="color:white;">Third Item</a></li>
+                </ul>
+        </div>
+        </div>
+    </nav>
+    <div class="container" style="margin-top:5%;margin-right:0px;margin-left:0px;">
+        <div class="row" style="margin-right:0px;margin-left:0px;">
+            <div class="col-md-12 col-lg-8 offset-md-1 offset-lg-1 offset-xl-2">
+                <form>
+                    <div class="form-group"><label>Movie Name :&nbsp;</label><input class="form-control" type="text" name="movie_name" required="" style="margin-right:0px;background-color:rgb(255, 255, 255, 0.75);"></div>
+                    <div class="form-group">
+                        <div class="form-row">
+                            <div class="col-3"><label class="col-form-label">Movie Catagory :&nbsp;</label></div>
+                            <div class="col">
+                                <div class="dropdown"><button class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false" type="button">Genere&nbsp;</button>
+                                    <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation" href="#">Action</a><a class="dropdown-item" role="presentation" href="#">Comedy</a><a class="dropdown-item" role="presentation" href="#">Drama</a><a class="dropdown-item"
+                                            role="presentation" href="#">Romantic</a><a class="dropdown-item" role="presentation" href="#">Romantic Comedy</a><a class="dropdown-item" role="presentation" href="#">Tragedy</a><a class="dropdown-item" role="presentation"
+                                            href="#">Horror</a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group"><label>Movie Price:&nbsp;</label><input class="form-control" type="text" name="price" required=""></div>
+                    <div class="form-group"><label>Movie Description:&nbsp;</label><textarea class="form-control"></textarea></div>
+                    <div class="form-group"><label>Movie Pics:&nbsp;</label><input type="file" accept="image/*" name="file" required=""></div>
+                    <div class="form-group"><button class="btn btn-primary" type="button" style="margin-top:5px;width:99px;">Submit</button></div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/js/lightbox.min.js"></script>
+</body>
+
+</html>
