@@ -1,11 +1,5 @@
 @include('partials.header')
-<script type="text/javascript">
-$.ajaxSetup({
-  headers: {
-'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-}
-});
-</script>
+
 <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
 <script src="{{ asset('assets/js/jquery.barrating.min.js') }}"></script>
 <div class="container" style="padding-top:  20px;">
@@ -22,11 +16,8 @@ $.ajaxSetup({
                     <p>{{$movie->description }}</p>
                 </div>
             </div>
-
-            <form class="" action="/movies/{{$movie->id}}/reserve" method="post">
-              {{ csrf_field() }}
-                <button class="btn btn-primary text-right" >Reserve</button>
-            </form>
+            <a class="btn btn-primary text-right" href="/movies/{{$movie->id}}/delete" >delete</a>
+            <a class="btn btn-primary text-right" href="/movies/{{$movie->id}}/edit" >edit</a>
             <div class="well" style="padding-top: 20px;">
                 <div class="star-ratings start-ratings-main clearfix">
                   <h1>How about star ratings?</h1>

@@ -33,4 +33,8 @@ class User extends Authenticatable
       }
       $this->attributes['password'] = $value;
     }
+
+    public function ticket(){
+      return $this->hasMany(Ticket::class);
+    }
 }

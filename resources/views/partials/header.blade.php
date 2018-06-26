@@ -27,13 +27,32 @@
         <div class="collapse navbar-collapse" id="navcol-1">
             <ul class="nav navbar-nav ml-auto nav navbar-nav mr-auto" style="width:780px;height:40px;font-size:18px;">
                 <li class="nav-item" role="presentation"><a class="nav-link" href="/" style="color:white;"><i class="fa fa-home"></i>&nbsp;Home</a></li>
+                @if(Illuminate\Support\Facades\Auth::check() && Illuminate\Support\Facades\Auth::user()->type == 'agent')
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="/profile" style="color:white;"><i class="fa fa-user"></i>&nbsp;Profile</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="/movies/add" style="color:white;"><i class="fa fa-plus"></i>&nbsp;Add Movie</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="/agent" style="color:white;"><i class="fa fa-dashboard"></i>&nbsp;Dashboard</a></li>
+
+                @endif
+                @if(Illuminate\Support\Facades\Auth::check() && Illuminate\Support\Facades\Auth::user()->type == 'admin')
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="/profile" style="color:white;"><i class="fa fa-user"></i>&nbsp;Profile</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="/admin" style="color:white;"><i class="fa fa-plus"></i>&nbsp;User Management</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="/agent" style="color:white;"><i class="fa fa-dashboard"></i>&nbsp;Dashboard</a></li>
+
+                @endif
+                @if(Illuminate\Support\Facades\Auth::check() && Illuminate\Support\Facades\Auth::user()->type == 'user')
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="/profile" style="color:white;"><i class="fa fa-user"></i>&nbsp;Profile</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="/admin" style="color:white;"><i class="fa fa-plus"></i>&nbsp;User Management</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="/agent" style="color:white;"><i class="fa fa-dashboard"></i>&nbsp;Dashboard</a></li>
+
+                @endif
                 @if(Illuminate\Support\Facades\Auth::check())
                     <li class="nav-item" role="presentation"><a class="nav-link" href="/logout" style="color:white;"><i class="icon ion-log-out"></i>&nbsp;LogOut</a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="/profile" style="color:white;"><i class="fa fa-user"></i>&nbsp;Profile</a></li>
                 @endif
-                <li class="nav-item" role="presentation"><a class="nav-link" href="/signup" style="color:white;"><i class="fa fa-sign-in"></i>&nbsp;Sign Up</a></li>
-                <li class="nav-item" role="presentation"><a class="nav-link" href="/login" style="color:white;"><i class="icon ion-log-in"></i>&nbsp;Login</a></li>
-            </ul>
+                @if(!Illuminate\Support\Facades\Auth::check())
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="/signup" style="color:white;"><i class="fa fa-sign-in"></i>&nbsp;Sign Up</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="/login" style="color:white;"><i class="icon ion-log-in"></i>&nbsp;Login</a></li>
+                @endif
+                </ul>
             <form class="form-inline ml-auto" action="/movies/search" method="get" target="_self">
                 <div class="form-group"><input class="form-control search-field" type="search" name="name" placeholder="search" id="search-field" style="background-color:rgba(255, 255, 255, 1);">
                   <button class="btn btn-success btn btn-outline-success my-2 my-sm-2" type="submit" style="padding-left:12px;margin-left:8px;">Search</button>

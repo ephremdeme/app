@@ -1,4 +1,4 @@
-@include('partials.header')
+@include('partials.dashboard')
     <div>
         <div class="container-fluid">
             <div class="row mh-100vh">

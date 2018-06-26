@@ -15,6 +15,22 @@
                             <option value="Drama">Drama</option></optgroup></select></div>
                       </div>
                     </div>
+                    <div class="form-group">
+                      <div class="form-row">
+                          <div class="col-3"><label class="col-form-label">Date :&nbsp;</label></div>
+                          <div class="col"><select class="form-control" name="date"><optgroup label="Select Gener">
+                            <option value="monday"  selected="">Monday</option>
+                            <option value="tuesday">Tuesday</option>
+                            <option value="wednsday">Wednsday</option>
+                            <option value="thursday">Thursday</option>
+                            <option value="friday">Friday</option>
+                            <option value="saturday">Saturday</option>
+                            <option value="sunday">Sunday</option>
+                          </optgroup></select></div>
+                      </div>
+                    </div>
+                    <div class="form-group"><label>Movie Time:&nbsp;</label><input class="form-control" type="number" name="time" required=""  min="1" max="12"</div>
+
                     <div class="form-group"><label>Movie Price:&nbsp;</label><input class="form-control" type="number" name="price" required="" ></div>
                     <div class="form-group"><label>Movie Description:&nbsp;</label><textarea class="form-control" name="description"></textarea></div>
                     <div class="form-group"><label>Movie Pics:&nbsp;</label><input type="file" accept="image/*" name="file" required=""></div>

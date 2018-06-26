@@ -19,7 +19,7 @@ class User
         return $next($request);
       }
       elseif (Auth::check() && Auth::user()->type == 'agent') {
-        return redirect('/movies');
+        return redirect('/');
       }
       else {
         return redirect('/');

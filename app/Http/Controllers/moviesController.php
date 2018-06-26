@@ -9,6 +9,7 @@ use App\Rate;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Auth;
 use DB;
+use DateTime;
 class moviesController extends Controller
 {
 
@@ -26,49 +27,43 @@ class moviesController extends Controller
       }elseif ($request->input('popular')) {
         $movies= Movies::all( )->sortByDesc('view', 1);
         return  view('show', compact('movies'));
+      }elseif ($request->input('date')) {
+        $movies=Movies::where('date', $request->input('date'))->get();
+        return  view('show', compact('movies'));
+      }else{
+        $movies=Movies::where('movie_name', 'like', '%'.$request->input('name').'%')->get();
+        return  view('show', compact('movies'));
       }
-      $movies=Movies::where('movie_name', 'like', '%'.$request->input('name').'%')->get();
-      return  view('show', compact('movies'));
-    }
-
-
-    public function create()
-    {
-      return view('movies.addMovie');
-    }
-
-    public function store(Request $request)
-    {
-        //
-      if($request->hasFile('file')){
-        $file = $request->file('file');
-        $image=time().".".$request->file->extension();
-        $file->move("uploads" ,$image);
-      }
-      $movie= new  Movies;
-      $movie->movie_name=$request->input('movie_name');
-      $movie->price=$request->input('price');
-      $movie->genere=$request->input('genere');
-      $movie->description=$request->input('description');
-      $movie->image=$image;
-
-      $movie->save();
-        return request()->all();
     }
 
     public function reserve(Request $request, $id)
     {
-      DB::transaction(function () use($id) {
 
+      DB::transaction(function () use($id) {
+        if(Movies::find($id)->seat>=33){
+          session()->flash('message', 'Sorry all are reserved');
+          return back();
+        }
+        $date = new DateTime();
         $balance=DB::table('users')->find(Auth::user()->id)->balance;
         $price=Movies::find($id)->price;
+        $movie=Movies::find($id);
+        $movie->seat+=1;
+        $movie->save();
         $cinema_balance=DB::table('cinema')->find(1)->balance;
         $balance=$balance- $price;
         $cinema_balance=$cinema_balance + $price;
         DB::table('cinema')->update(['balance' => $cinema_balance]);
         //DB::table('users')->find(Auth::user()->id)->update(['balance' => $balance]);
         DB::update('update users set balance = ? where id = ?', [$balance,Auth::user()->id ]);
-
+        DB::table('tickets')->insert([
+          'movie_name'=>Movies::find($id)->movie_name,
+          'movies_id'=>$id,
+          'user_id'=>Auth::user()->id,
+          'status'=>"pending",
+          'ticket_number'=> $date->getTimestamp()
+        ]);
+        session()->flash('message', 'Successfully reserved');
       });
       return back();
     }
@@ -89,29 +84,7 @@ class moviesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        $movie= Movies::find($id);
-        return view('movies.edit', ['movie'=>$movie]);
-    }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        $movie= Movies::find($id);
-        $movie->movie_name=$request->input('movie_name');
-        $movie->price=$request->input('price');
-        $movie->genere=$request->input('genere');
-        $movie->description=$request->input('description');
-        $movie->save();
-        return view('movies.edit', ['movie'=>$movie]);
-    }
 
     public function comment(Request $request, $id)
     {
@@ -148,4 +121,6 @@ class moviesController extends Controller
       $rateArray=array('average'=>$average, 'count'=>$count);
       return $rateArray;
     }
+
+
 }

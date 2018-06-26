@@ -4,6 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use app\User;
+use App\Comment;
+use App\Movies;
+use DB;
+use Illuminate\Support\Facades\Auth;
+
+
 class UserController extends Controller
 {
     /**
@@ -13,7 +19,8 @@ class UserController extends Controller
      */
     public function index()
     {
-      return User::all();
+      $user=Auth::user();
+      return view('profile', compact('user'));
     }
 
     /**
@@ -21,64 +28,48 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function comment()
     {
-        //
+        $comment=Comment::all();
+        return $comment;
+    }
+    public function users()
+    {
+        $users=User::all();
+        return view('user', compact('users'));
+    }
+    public function movies()
+    {
+        $comment=Movies::all();
+        return $comment;
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
-        return User::find($id);
+      $user=User::find($id);
+      return view('userUpdate', compact('user'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        //
+      $user=User::find($id);
+      $user->delete();
+      session()->flash('message', 'Successfully Deleted');
+      return redirect('/admin');
+    }
+
+    public function makeAgent($id)
+    {
+      $user=User::find($id);
+      $user->type="agent";
+      $user->save();
+      session()->flash('message', 'Successfully Created Cinema Agent');
+      return redirect('/admin');
+    }
+
+    public function getTicket()
+    {
+      $user = DB::table('ticket')->where('users_id',Auth::user()->id )->get();
+      return $user;
     }
 }

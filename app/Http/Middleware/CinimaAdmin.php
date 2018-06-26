@@ -19,7 +19,7 @@ class CinimaAdmin
         return $next($request);
       }
       elseif (Auth::check() && Auth::user()->type == 'admin') {
-        return redirect('/movies');
+        return redirect('/');
       }
       else {
         return redirect('/');
