@@ -9,7 +9,8 @@
                           {{csrf_field()}}
                             <div class="form-group"><label class="text-secondary">User Name</label>
                               <input class="form-control" type="text" name="name" placeholder="Full Name"  style="width:372px;"></div>
-                            <div class="form-group"><label class="text-secondary">Email</label><input class="form-control" type="text" name="email" placeholder="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,15}$" inputmode="email" style="width:372px;"></div>
+                            <div class="form-group"><label class="text-secondary">Email</label>
+                              <input class="form-control" type="text" name="email" placeholder="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,15}$" inputmode="email" style="width:372px;"></div>
                             <div class="form-group"><label class="text-secondary" >Balance</label>
                               <input class="form-control" type="number" name="balance" placeholder="balane" min="0" max="10000"  value="0" style="width:372px;"></div>
 

@@ -9,7 +9,6 @@ class Rate extends Model
     //
     public function user()
     {
-      // code...
       return $this->belongsTo(User::class);
     }
 }
